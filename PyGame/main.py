@@ -1,58 +1,66 @@
-# Importing pygame module
 import pygame
-from pygame.locals import *
+import sys
 
-# initiate pygame and give permission
-# to use pygame's functionality.
 pygame.init()
+clock = pygame.time.Clock()
 
-# create the display surface object
-# of specific dimension.
-window = pygame.display.set_mode((600, 600))
+screen = pygame.display.set_mode((600, 400))
+pygame.display.set_caption("Balon na lajně")
 
-# Fill the scree with white color
-window.fill((255, 255, 255))
+# čára
+line_y = 300
+line_start = 100
+line_end = 500
 
-# creating list in which we will store
-# the position of the circle
-circle_positions = []
+# načtení obrázku
+balloon_img = pygame.image.load("balon.png").convert_alpha()
+balloon_img = pygame.transform.scale(balloon_img, (80, 80))
 
-# radius of the circle
-circle_radius = 60
+width = balloon_img.get_width()
+height = balloon_img.get_height()
 
-# Color of the circle
-color = (0, 0, 255)
+# start
+x = line_start + width // 2
+speed = 4
+direction = 1   # 1 = doprava, -1 = doleva
+angle = 0
 
-# Creating a variable which we will use
-# to run the while loop
-run = True
+while True:
+    clock.tick(60)
 
-# Creating a while loop
-while run:
-
-    # Iterating over all the events received from
-    # pygame.event.get()
     for event in pygame.event.get():
+        if event.type == pygame.QUIT:
+            pygame.quit()
+            sys.exit()
 
-        # If the type of the event is quit
-        # then setting the run variable to false
-        if event.type == QUIT:
-            run = False
+    # pohyb
+    x += speed * direction
 
-        # if the type of the event is MOUSEBUTTONDOWN
-        # then storing the current position
-        elif event.type == MOUSEBUTTONDOWN:
-            position = event.pos
-            circle_positions.append(position)
-            
-    # Using for loop to iterate
-    # over the circle_positions
-    # list
-    for position in circle_positions:
+    # rotace podle směru
+    angle -= speed * direction * 2
 
-        # Drawing the circle
-        pygame.draw.circle(window, color, position,
-                           circle_radius)
+    # otočení na krajích
+    if x >= line_end - width // 2:
+        direction = -1
+    if x <= line_start + width // 2:
+        direction = 1
 
-    # Draws the surface object to the screen.
-    pygame.display.update()
+    screen.fill((30, 30, 30))
+
+    # čára
+    pygame.draw.line(screen, (255, 255, 255),
+                     (line_start, line_y),
+                     (line_end, line_y), 5)
+
+    # rotace obrázku
+    rotated_img = pygame.transform.rotate(balloon_img, angle)
+    rect = rotated_img.get_rect(
+        center=(x, line_y - height // 2)  # přesně na čáře
+    )
+
+    screen.blit(rotated_img, rect)
+
+    pygame.display.flip()
+
+
+
