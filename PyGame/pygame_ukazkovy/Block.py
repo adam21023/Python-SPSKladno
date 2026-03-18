@@ -13,8 +13,8 @@ class Block(pygame.sprite.Sprite):
 
     def update(self):
         self.rect.y += self.speed
-        if self.rect.top > HEIGHT:
+        if self.rect.top > HEIGHT+100:
             self.kill()
-
+            
 if __name__ == "__main__":
     import main
