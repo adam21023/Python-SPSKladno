@@ -9,7 +9,7 @@ running = True
 clock = pygame.time.Clock()
 score = 0
 score_font = pygame.font.SysFont("Arial", 30)
-score_text = score_font.render(f"score:{score}", True, BLACK)
+score_text = score_font.render(f"score:{score}", True, WHITE)
 score_rect = score_text.get_rect(topleft=(10, 10))
 hrac = Player(WIDTH // 2, HEIGHT)
 hrac_group = pygame.sprite.Group()
@@ -30,7 +30,10 @@ while running:
         if event.type == BLOCK_SPAWN:
             blok_group.add(Block())
             score += 1
-            score_text = score_font.render(f"Score: {score}", True, BLACK)
+            score_text = score_font.render(f"Score: {score}", True, WHITE)
+        if score >= highscore:
+            highscore = score
+            highscore_text = score_font.render
     
     hrac_group.update()
     hrac_group.draw(screen)
@@ -45,8 +48,8 @@ while running:
         pygame.time.delay(100)
         running = False
     
-    screen.blit
-
+    screen.blit(score_text, score_rect)
+    screen.blit(highscore_text, highscore_rect)
     pygame.display.update()
     clock.tick(FPS)
 pygame.quit()
