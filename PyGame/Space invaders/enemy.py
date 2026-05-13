@@ -12,7 +12,7 @@ class Enemy(pygame.sprite.Sprite):
         self.direction = 1
         self.shooted = False
         self.shooting_cooldown = rand.randint(1000,5000)
-        self.last_shooting_time = 0
+        self.last_shooting_time = pygame.time.get_ticks()
         self.shoot_timer = 0
         self.hp = 1
     def update(self):

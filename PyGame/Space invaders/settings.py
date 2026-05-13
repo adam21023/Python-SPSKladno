@@ -8,7 +8,7 @@ FPS = 60
 #player settings
 PLAYER_WIDTH = 50
 PLAYER_HEIGHT = 50
-PLAYER_SPEED = 2
+PLAYER_SPEED = 5
 PLAYER_IMAGE_PATH = "obrázky/spaceship.png"
 PLAYER_BULLET_IMAGE_PATH = "obrázky/bullet.png"
 PLAYER_BULLET_SPEED = 5

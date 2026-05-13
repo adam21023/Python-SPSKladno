@@ -1,4 +1,5 @@
 import pygame
+import random as rand
 import settings
 from Player import Player
 from Enemy import Enemy
@@ -15,8 +16,6 @@ player = Player()
 player_group = pygame.sprite.Group()
 player_group.add(player)
 
-enemy_shoot = pygame.USEREVENT + 1
-pygame.time.set_timer(enemy_shoot, 2000)
 explosion_group = pygame.sprite.Group()
 player_bullet_group = pygame.sprite.Group()
 enemy_bullet_group = pygame.sprite.Group()
@@ -55,10 +54,13 @@ while running:
                     player_bullet_group.add(bullet)
                     player.cooldown = pygame.time.get_ticks()
 
-        if event.type == enemy_shoot:
-            for enemy in enemy_group:
-                bullet = Bullet(enemy.rect.left +5 ,enemy.rect.bottom +40 )
-                enemy_bullet_group.add(bullet)
+    current_time = pygame.time.get_ticks()
+    for enemy in enemy_group:
+        if current_time - enemy.last_shooting_time >= enemy.shooting_cooldown:
+            bullet = Bullet(enemy.rect.left +5 ,enemy.rect.bottom +40)
+            enemy_bullet_group.add(bullet)
+            enemy.last_shooting_time = current_time
+            enemy.shooting_cooldown = rand.randint(1000, 5000)
 
     if pygame.sprite.groupcollide(player_group, enemy_bullet_group, True, True, collided = pygame.sprite.collide_mask):
         print("Player hit!")
