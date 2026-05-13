@@ -5,13 +5,31 @@ SCREEN_WIDTH = 800
 SCREEN_HEIGHT = 600
 FPS = 60
 
-
 #player settings
 PLAYER_WIDTH = 50
 PLAYER_HEIGHT = 50
-PLAYER_SPEED = 5
-PLAYER_IMAGE_PATH = "obrazky/spaceship.png"
+PLAYER_SPEED = 2
+PLAYER_IMAGE_PATH = "obrázky/spaceship.png"
+PLAYER_BULLET_IMAGE_PATH = "obrázky/bullet.png"
+PLAYER_BULLET_SPEED = 5
 
-
+ENEMY_DROP_SPEED = 10
+ENEMY_SPEED = 2
 ENEMY_SCALE = 0.76
-ENEMY_IMAGE_PATH = "obrazky/alien{}.png"
+ENEMY_IMAGE_PATH = "obrázky/alien{}.png"
+ENEMY_BULLET_IMAGE_PATH = "obrázky/alien_bullet.png"
+ENEMY_BULLET_SPEED = 4
+ENEMY_HP_BAR_WIDTH = 200
+ENEMY_HP_BAR_HEIGHT = 20
+
+
+EXPLOSION_IMAGE_PATH = "obrázky/exp{}.png"
+
+BOSS_SCALE = 3
+
+# barvy
+GREEN = (0, 255, 0)
+YELLOW = (255, 255, 0)
+RED = (255, 0, 0)
+WHITE = (255, 255, 255)
+BLACK = (0, 0, 0)
